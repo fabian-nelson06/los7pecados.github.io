@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+    <link rel="shortcut icon" href="images/lo.png" sizes="32x32" type="image/x-icon">
+    <meta charset="UTF-8">
+    <link href="estylee.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor</title>
+    
+</head>
+<body class="reproductor">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <header class="header">
+        <div class="container logo-nav-container">
+            <a href="#" class="logo"><img src="images/lo.png" width="50" height="50">Los siete pecados capitales</a>
+            <span class="menu-icon">Ver menú</span>
+            <nav class="navigation">
+            <ul id="desple">
+                <li><a href="Principal.html">Inicio</a></li>
+                <li><a href="sipnosis.html">Sipnosis</a></li>
+                <li><a href="Personajes.html">Personajes</a></li>
+            
+                <li><a href="reproduct.html">Reproductor</a></li>
+                <li><a href="Contactanos.html">Contactanos</a></li>
+            </ul>
+
+        </nav>
+        </div>
+    </header>
+
+
+    <main class="main">
+        <div class="container">
+
+            <style>
+                body {
+                  font-family: Arial, sans-serif;
+                }
+          
+                .player {
+                  max-width: 800px;
+                  margin: 0 auto;
+                  padding: 20px;
+                  background-color: transparent 20%;
+                  border-radius: 10px;
+                  border-color: violet;
+                }
+          
+                video,
+                audio {
+                  display: block;
+                  width: 100%;
+                  margin-bottom: 20px;
+                  border-radius: 5px;
+                }
+          
+                .controls {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+          
+                .control {
+                  font-size: 24px;
+                  padding: 10px;
+                  margin: 0 10px;
+                  background-color: #333;
+                  color: #fff;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                }
+          
+                .control:hover {
+                  background-color: #555;
+                }
+          
+                .volume {
+                  position: relative;
+                  width: 100px;
+                  height: 20px;
+                  margin-left: 10px;
+                  background-color: #ccc;
+                  border-radius: 10px;
+                }
+          
+                .volume-bar {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  height: 100%;
+                  background-color: #333;
+                  border-radius: 10px;
+                  transition: width 0.1s linear;
+                }
+          
+                .mute {
+                  margin-left: 10px;
+                  font-size: 24px;
+                  padding: 10px;
+                  background-color: #333;
+                  color: #fff;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                }
+          
+                .mute:hover {
+                  background-color: transparent;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="player">
+                <video id="video-player" src="video/w.mp4" controls></video>
+                <audio id="audio-player" src="musica/1.mpeg" controls></audio>
+                <div class="controls">
+                  <button class="control" onclick="play()">▶</button>
+                  <button class="control" onclick="pause()">⏸</button>
+                  <button class="control" onclick="stop()">⏹</button>
+                  <div class="volume">
+                    <div class="volume-bar" id="volume-bar"></div>
+                  </div>
+                  <button class="mute" onclick="mute()">🔇</button>
+                </div>
+              </div>
+              <script>
+                var videoPlayer = document.getElementById("video-player");
+                var audioPlayer = document.getElementById("audio-player");
+                var volumeBar = document.getElementById("volume-bar");
+          
+                function play() {
+                  if (videoPlayer.paused) {
+                    videoPlayer.play();
+                    audioPlayer.play();
+                  }
+                }
+          
+                function pause() {
+                  if (!videoPlayer.paused) {
+                    videoPlayer.pause();
+                    audioPlayer.pause();
+                  }
+                }
+          
+                function stop() {
+                  videoPlayer.currentTime = 0;
+                  audioPlayer.currentTime = 0;
+                  videoPlayer.pause();
+                  audioPlayer.pause();
+                }
+          
+                function mute() {
+                  if (videoPlayer.muted) {
+                    videoPlayer.muted = false;
+                    audioPlayer.muted = false;
+                    document.querySelector(".mute").textContent = "🔇";
+              } else {
+                videoPlayer.muted = true;
+                audioPlayer.muted = true;
+                document.querySelector(".mute").textContent = "🔊";
+              }
+            }
+          
+            function updateVolume() {
+              var volume = volumeBar.offsetWidth / volumeBar.parentNode.offsetWidth;
+              videoPlayer.volume = volume;
+              audioPlayer.volume = volume;
+            }
+          
+            volumeBar.addEventListener("mousedown", function (event) {
+              updateVolume();
+              window.addEventListener("mousemove", updateVolume);
+              window.addEventListener("mouseup", function () {
+                window.removeEventListener("mousemove", updateVolume);
+              });
+            });
+          </script>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Derechos reservados por el autor</p>
+
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="Js/script.js"></script>
+</body>
+</html>
